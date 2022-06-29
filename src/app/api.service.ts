@@ -24,14 +24,15 @@ export class ApiService {
     return this.validatedResponse(response);
   }
 
-  async updateTodo(todoId: number): Promise<TodoModel> {
+  async updateTodo(todoId: number): Promise<boolean> {
     const response = await fetch(`${this.mockUrl}patch/${todoId}`,
       {
         method: 'PATCH',
         headers: this.headers,
         body: JSON.stringify({ isComplete: true }),
       });
-    return this.validatedResponse(response);
+
+    return (await this.validatedResponse(response)).status === 'success';
   }
 
   private async validatedResponse(response: Response): Promise<any> {

@@ -1,21 +1,28 @@
-<div fxFlex="50" fxFlexOffset="25">
+<div fxFlex="100" fxFlex.gt-sm="50" fxFlexOffset.gt-sm="25">
   <app-loader *ngIf="loading"></app-loader>
-  <mat-card *ngIf="todos.length">
+  <mat-card *ngIf="todoList.length; else showEmptyState">
     <mat-card-content fxLayout="column">
-      <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let todo of todos">
+      <div class="todo-item" [ngClass]="{ 'overdue': todo.isOverdue, 'completed': todo.isComplete, 'not-completed': !todo.isOverdue && !todo.isComplete }"
+        fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let todo of todoList" (click)="updateTodo(todo)">
         <div fxLayout="row" fxLayoutAlign="start center"  fxLayoutGap="10px">
           <div>
             <mat-icon mat-list-icon *ngIf="todo.isComplete; else showIncomplete">check_box</mat-icon>
             <ng-template #showIncomplete>
-              <mat-icon mat-list-icon>check_box_outline_blank</mat-icon>
+              <mat-icon mat-list-icon *ngIf="!todo.isUpdating; else showPending">check_box_outline_blank</mat-icon>
+
+              <ng-template #showPending>
+                <mat-spinner diameter="25"></mat-spinner>
+              </ng-template>
             </ng-template>
           </div>
 
-          <div>{{todo.description}}</div>
+          <p class="description">{{todo.description}}</p>
         </div>
-        <div>{{todo.dueDate | date:'MM/dd/yyyy'}}</div>
+        <div class="date" *ngIf="todo.dueDate">{{todo.dueDate | date:'MM/dd/yyyy'}}</div>
       </div>
     </mat-card-content>
   </mat-card>
-  <!-- TODO: add in a empty state -->
+  <ng-template #showEmptyState>
+    <app-empty-state title="No todos found"></app-empty-state>
+  </ng-template>
 </div>

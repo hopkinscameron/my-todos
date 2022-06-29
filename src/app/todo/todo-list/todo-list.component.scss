@@ -1,0 +1,43 @@
+.mat-card {
+  background-color: unset;
+  color: black;
+}
+
+.todo-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+
+  .description {
+    margin-bottom: 0px;
+  }
+
+  .date {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: black;
+    padding: 5px 10px;
+  }
+}
+
+.todo-item:hover {
+  cursor: pointer;
+  box-shadow: 0px 5px 5px lightgray;
+}
+
+.todo-item.overdue {
+  background-color: lightcoral;
+}
+
+.todo-item.not-completed {
+  background-color: lightgray;
+}
+
+.todo-item.completed {
+  background-color: lightgreen;
+
+  .description {
+    text-decoration: line-through;
+  }
+}
