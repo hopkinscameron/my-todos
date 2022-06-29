@@ -25,12 +25,6 @@ export class TodoListComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       this.todos = await this.apiService.getTodos();
-      this.todos = this.todos.map((todo, index) => {
-        const random = Math.random();
-        todo.isComplete = random < 0.5;
-        todo.dueDate = random < 0.25 ? undefined : todo.dueDate;
-        return todo;
-      });
       this.todoList = this.getTodoListModels(this.todos);
       this.todoList = this.orderTodos(this.todoList);
     } catch (err) {
