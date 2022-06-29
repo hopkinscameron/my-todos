@@ -1,0 +1,14 @@
+<p>TODOS</p>
+<mat-card>
+  <mat-card-content>
+    <mat-list-item *ngFor="let todo of todos">
+      <mat-icon mat-list-icon *ngIf="todo.isComplete; else showIncomplete">check_box</mat-icon>
+      <ng-template #showIncomplete>
+        <mat-icon mat-list-icon>check_box_outline_blank</mat-icon>
+      </ng-template>
+
+      <div mat-line>{{todo.description}}</div>
+      <div mat-line>{{todo.dueDate | date}}</div>
+    </mat-list-item>
+  </mat-card-content>
+</mat-card>
