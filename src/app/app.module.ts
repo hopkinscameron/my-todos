@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from 'src/shared/modules/material.module';
 import { AppRoutingModule } from './app.routing';
@@ -18,8 +19,9 @@ import { ApiService } from './api.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
